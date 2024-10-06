@@ -1,0 +1,1 @@
+SELECT * FROM ventas_satisfacción.area;
