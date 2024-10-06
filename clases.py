@@ -59,13 +59,33 @@ class Usuarios:  #para crud de los usuarios
         print(f"\nSe registró el usuario {username}.")
 
     def modificar_usuario(self):
-        pass
+        username = input("Ingrese el username del usuario a modificar: ")
+        if username in self.usuarios:
+        email = input(f"Nuevo email para {username}: ")
+        password = input(f"Nueva password para {username}: ")
+        self.usuarios[username].email = email
+        self.usuarios[username].password = password
+        self.guardar_usuarios()  # Guardar cambios en el archivo binario
+        print(f"Usuario {username} modificado exitosamente.")
+        else:
+        print(f"No existe el usuario con username {username}.")
 
     def eliminar_usuario(self):
-        pass
+        username = input("Ingrese el username del usuario a eliminar: ")
+        if username in self.usuarios:
+        del self.usuarios[username]  # Eliminar del diccionario
+        self.guardar_usuarios()  # Guardar cambios en el archivo binario
+        print(f"Usuario {username} eliminado correctamente.")
+        else:
+        print(f"No existe el usuario con username {username}.")
 
     def buscar_usuario(self):
-        pass
+        username = input("Ingrese el username o email del usuario a buscar: ")
+        for user in self.usuarios.values():
+        if user.username == username or user.email == username:
+            print(f"ID: {user.id}, Username: {user.username}, Email: {user.email}")
+            return
+        print("Usuario no encontrado.")
 
     def mostrar_usuarios(self):
         if not self.usuarios:
