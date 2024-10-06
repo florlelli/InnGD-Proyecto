@@ -14,3 +14,16 @@ El proyecto está dividido en diferentes módulos:
 - Módulo de Aritmética: Realiza cálculos matemáticos básicos utilizados en el CAPTCHA y otras operaciones internas.
 - Módulo de Inventario: Mantiene actualizada la cantidad de productos disponibles y alerta cuando el stock es bajo.
 - Módulo de Clientes y Empleados: Registra y gestiona la información de los clientes y empleados, con seguimiento de su actividad y desempeño.
+## Base de Datos
+- **Estructura de la Base de Datos**: 
+  La base de datos relacional en MySQL contiene las siguientes tablas:
+  1. **Usuarios**: Registra la información de los usuarios.
+  2. **Accesos**: Registra los accesos de los usuarios con fechas de ingreso y salida.
+  
+  Estas tablas están relacionadas a través de claves foráneas.
+
+- **Consultas SQL**:
+  Se utilizan las siguientes consultas SQL para la interacción con la base de datos:
+  - `SELECT`, `INSERT`, `UPDATE`, `DELETE` para el CRUD de usuarios.
+  - Consultas con `JOIN` para obtener los accesos de cada usuario.
+
