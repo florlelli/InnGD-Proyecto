@@ -14,6 +14,24 @@ El proyecto está dividido en diferentes módulos:
 - Módulo de Aritmética: Realiza cálculos matemáticos básicos utilizados en el CAPTCHA y otras operaciones internas.
 - Módulo de Inventario: Mantiene actualizada la cantidad de productos disponibles y alerta cuando el stock es bajo.
 - Módulo de Clientes y Empleados: Registra y gestiona la información de los clientes y empleados, con seguimiento de su actividad y desempeño.
+## Instrucciones de Instalación y Ejecución
+1. Clona este repositorio en tu máquina local:
+   ```bash
+   git clone https://github.com/usuario/repositorio.git
+   ```
+2. Asegúrate de tener Python instalado. No necesitas instalar paquetes externos para ejecutar este proyecto.
+3. Ejecuta el archivo principal del programa:
+   ```bash
+   python main.py
+   ```
+## Funcionalidades de la Segunda Parte
+- **Gestión de Usuarios**: 
+  - El programa permite agregar, modificar, eliminar y buscar usuarios.
+  - Los usuarios se almacenan en un archivo binario llamado `usuarios.ispc`.
+
+- **Registro de Accesos**:
+  - Cada vez que un usuario inicia sesión correctamente, se registra un acceso con la fecha de ingreso y salida en el archivo `accesos.ispc`.
+  - Los intentos fallidos se registran en el archivo de texto `logs.txt`.
 ## Base de Datos
 - **Estructura de la Base de Datos**: 
   La base de datos relacional en MySQL contiene las siguientes tablas:
@@ -26,4 +44,8 @@ El proyecto está dividido en diferentes módulos:
   Se utilizan las siguientes consultas SQL para la interacción con la base de datos:
   - `SELECT`, `INSERT`, `UPDATE`, `DELETE` para el CRUD de usuarios.
   - Consultas con `JOIN` para obtener los accesos de cada usuario.
+## Posibles Inconvenientes y Soluciones
+- Durante el desarrollo, tuvimos algunos problemas con la serialización de datos al almacenar usuarios en archivos binarios. Esto se resolvió utilizando el módulo `pickle` de Python.
+
+
 
