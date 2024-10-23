@@ -1,0 +1,2 @@
+Intento fallido el 2024-10-06 22:13:44.231062. Usuario: ejemplo. Password: 123ejemplo
+Intento fallido el 2024-10-06 22:13:59.034437. Usuario: ejemploalgo. Password: ejemplo123
