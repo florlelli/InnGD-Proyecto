@@ -20,6 +20,7 @@ class Usuarios:  #para crud de los usuarios
     def __init__(self):      
         self.usuarios = {} 
         self.accesos = [] 
+        self.usuarios_ordenados = False  # Nuevo atributo para rastrear si los usuarios están ordenados
         self.cargar_usuarios() 
         self.cargar_accesos()
         
@@ -57,8 +58,9 @@ class Usuarios:  #para crud de los usuarios
         # Volver a convertir la lista ordenada en un diccionario
         self.usuarios = {user.username: user for user in usuarios_list}
         self.guardar_usuarios()  # Guardar los usuarios ordenados en el archivo binario
+        self.usuarios_ordenados = True  # Actualizamos el estado a ordenado
         print("Usuarios ordenados por burbuja y guardados en usuarios.ispc.")
-        
+
 #CRUDS----------------------------------------------------------------------------------------------------------------
     def agregar_usuario(self): 
         id = len(self.usuarios) + 1 
@@ -70,6 +72,7 @@ class Usuarios:  #para crud de los usuarios
         password = input("Ingrese una password: ")
         self.usuarios[username] = Usuario(id, username, password, email)  
         self.guardar_usuarios() 
+        self.usuarios_ordenados = False
         print(f"\nSe registró el usuario {username}.")
 
     def modificar_usuario(self):
@@ -89,17 +92,47 @@ class Usuarios:  #para crud de los usuarios
         if username in self.usuarios:
             del self.usuarios[username]  
             self.guardar_usuarios()  
+            self.usuarios_ordenados = False
             print(f"Usuario {username} eliminado correctamente.")
         else:
             print(f"No existe el usuario con username {username}.")
 
     def buscar_usuario(self):
-        username = input("Ingrese el username o email del usuario a buscar: ")
+        username = input("Ingrese el username del usuario a buscar: ")
+        if self.usuarios_ordenados:
+            # Implementación de búsqueda binaria
+            print("Búsqueda realizada por técnica de búsqueda binaria.")
+            resultado = self.busqueda_binaria(username)
+        else:
+            # Implementación de búsqueda secuencial
+            print("Búsqueda realizada por técnica de búsqueda secuencial.")
+            resultado = self.busqueda_secuencial(username)
+
+        if resultado:
+            print(f"ID: {resultado.id}, Username: {resultado.username}, Email: {resultado.email}")
+        else:
+            print("Usuario no encontrado.")
+
+    def busqueda_secuencial(self, username):
         for user in self.usuarios.values():
-            if user.username == username or user.email == username:
-                print(f"ID: {user.id}, Username: {user.username}, Email: {user.email}")
-            return
-        print("Usuario no encontrado.")
+            if user.username == username:
+                return user
+        return None
+
+    def busqueda_binaria(self, username):
+        usuarios_list = sorted(self.usuarios.values(), key=lambda user: user.username)
+        low, high = 0, len(usuarios_list) - 1
+
+        while low <= high:
+            mid = (low + high) // 2
+            if usuarios_list[mid].username == username:
+                return usuarios_list[mid]
+            elif usuarios_list[mid].username < username:
+                low = mid + 1
+            else:
+                high = mid - 1
+
+        return None
 
     def mostrar_usuarios(self):
         if not self.usuarios:
