@@ -45,6 +45,20 @@ class Usuarios:  #para crud de los usuarios
         with open('accesos.ispc', 'wb') as f:
             pickle.dump(self.accesos, f)
 
+    def ordenar_usuarios_burbuja(self):
+        usuarios_list = list(self.usuarios.values())  # Convertimos el diccionario de usuarios a una lista de objetos Usuario
+        n = len(usuarios_list)
+        for i in range(n):
+            for j in range(0, n - i - 1):
+                # Comparamos los usernames de los usuarios para ordenarlos
+                if usuarios_list[j].username > usuarios_list[j + 1].username:
+                    usuarios_list[j], usuarios_list[j + 1] = usuarios_list[j + 1], usuarios_list[j]
+        
+        # Volver a convertir la lista ordenada en un diccionario
+        self.usuarios = {user.username: user for user in usuarios_list}
+        self.guardar_usuarios()  # Guardar los usuarios ordenados en el archivo binario
+        print("Usuarios ordenados por burbuja y guardados en usuarios.ispc.")
+        
 #CRUDS----------------------------------------------------------------------------------------------------------------
     def agregar_usuario(self): 
         id = len(self.usuarios) + 1 

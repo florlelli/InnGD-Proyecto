@@ -37,7 +37,8 @@ def menu_gestion_usuarios():
         print(Fore.YELLOW + "3. Eliminar un usuario.")
         print(Fore.YELLOW + "4. Buscar un usuario.")
         print(Fore.YELLOW + "5. Mostrar todos los usuarios.")
-        print(Fore.YELLOW + "6. Volver al menú principal.")
+        print(Fore.YELLOW + "6. Ordenar usuarios por burbuja y guardar.")
+        print(Fore.YELLOW + "7. Volver al menú principal.")
 
         opcion = input(Fore.GREEN + "Ingrese su opción: ")
 
@@ -52,6 +53,8 @@ def menu_gestion_usuarios():
         elif opcion == "5":
             ejecutar.mostrar_usuarios()
         elif opcion == "6":
+            ejecutar.ordenar_usuarios_burbuja() 
+        elif opcion == "7":
             break
         else:
             print(Fore.RED + "Opción incorrecta. Ingrese otra.")
