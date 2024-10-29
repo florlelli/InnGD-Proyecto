@@ -15,16 +15,16 @@ gestion_acceso = GestionAcceso()
 def menu_principal():
     while True:
         print(Fore.CYAN + "\n--- Menú Principal ---")
-        print(Fore.YELLOW + "1. Gestión de usuarios.")  
+        print(Fore.YELLOW + "1. Usuarios y Accesos de la Aplicación.")  
         print(Fore.YELLOW + "2. Mostrar los datos de accesos.")
-        print(Fore.YELLOW + "3. Ingresar al sistema e ir a la base de datos.")  
-        print(Fore.YELLOW + "4. Datos pluviales.")
-        print(Fore.YELLOW + "5. Salir.")
+        print(Fore.YELLOW + "3. Ingresar al sistema con los datos de usuario.")  
+        print(Fore.YELLOW + "4. Análisis de datos.")
+        print(Fore.YELLOW + "5. Salir de la palicación.")
 
         opcion = input(Fore.GREEN + "Ingrese su opción: ")
 
         if opcion == "1":
-            menu_gestion_usuarios()
+            menu_usuarios()
         elif opcion == "2":
             menu_accesos()
         elif opcion == "3":
@@ -37,16 +37,35 @@ def menu_principal():
         else:
             print(Fore.RED + "Opción incorrecta. Ingrese otra.")
 
+
+def menu_usuarios():
+    while True:
+        print(Fore.CYAN + "\n--- Usuarios y Accesos de la Aplicación ---")
+        print(Fore.YELLOW + "1. Acceder al CRUD de los Usuarios en POO.")  
+        print(Fore.YELLOW + "2. Mostrar los datos de Accesos.")
+        print(Fore.YELLOW + "3. Ordenamiento y Búsqueda de Usuarios. ")  
+        print(Fore.YELLOW + "4. Volver al Menú principal. ")
+
+        opcion = input(Fore.GREEN + "Ingrese su opción: ")
+
+        if opcion == "1":
+            menu_gestion_usuarios()
+        elif opcion == "2":
+            menu_accesos()
+        elif opcion == "3":
+            menu_ordenamiento() 
+        elif opcion == "4":
+            break
+        else:
+            print(Fore.RED + "Opción incorrecta. Ingrese otra.")    
+
 def menu_gestion_usuarios():
     while True:
         print(Fore.CYAN + "\n--- Menú de Gestión de Usuarios ---")
         print(Fore.YELLOW + "1. Agregar un nuevo usuario.")
         print(Fore.YELLOW + "2. Modificar un usuario.")
         print(Fore.YELLOW + "3. Eliminar un usuario.")
-        print(Fore.YELLOW + "4. Buscar un usuario.")
-        print(Fore.YELLOW + "5. Mostrar todos los usuarios.")
-        print(Fore.YELLOW + "6. Ordenar usuarios por burbuja y guardar.")
-        print(Fore.YELLOW + "7. Volver al menú principal.")
+        print(Fore.YELLOW + "4. Volver al menú principal.")
 
         opcion = input(Fore.GREEN + "Ingrese su opción: ")
 
@@ -57,15 +76,43 @@ def menu_gestion_usuarios():
         elif opcion == "3":
             ejecutar.eliminar_usuario()
         elif opcion == "4":
-            ejecutar.buscar_usuario()
-        elif opcion == "5":
-            ejecutar.mostrar_usuarios()
-        elif opcion == "6":
-            ejecutar.ordenar_usuarios_burbuja() 
-        elif opcion == "7":
             break
         else:
             print(Fore.RED + "Opción incorrecta. Ingrese otra.")
+
+def menu_ordenamiento():
+    while True:
+        print(Fore.CYAN + "\n--- Menú de Ordenamiento de Usuarios ---")
+        print(Fore.YELLOW + "1. Ordenar los Usuarios. ")
+        print(Fore.YELLOW + "2. Buscar y Mostrar los Usuarios.")
+        print(Fore.YELLOW + "3. Volver al menú principal.")
+
+        opcion = input(Fore.GREEN + "Ingrese su opción: ")
+
+        if opcion == "1":
+            ejecutar.ordenar_usuarios_burbuja()
+        elif opcion == "2":
+            print("Falta") #falta un submenu con opciones de búsqueda por dni, username o mail. 
+        elif opcion == "3":
+            break
+        else:
+            print(Fore.RED + "Opción incorrecta. Ingrese otra.") 
+
+def menu_accesos():
+      while True:
+        print(Fore.YELLOW +"1. Mostrar todos los accesos. ")
+        print(Fore.YELLOW +"2. Mostrar los logs de intentos fallidos. ")
+        print(Fore.YELLOW +"3. Salir")
+        opcion = input(Fore.GREEN + "Seleccione una opción: ")
+
+        if opcion == '1':
+            gestion_acceso.mostrar_accesos()
+        elif opcion == '2':
+            print("falta.") #falta mostrar los logs   
+        elif opcion == '3':
+            break
+        else:
+            print(Fore.RED + "Opción no válida. Intentar de nuevo.")  
 
 def menu_consultas(conn):
     while True:
@@ -79,7 +126,7 @@ def menu_consultas(conn):
         print(Fore.YELLOW + "7. Muestra los clientes y sus direcciones.") 
         print(Fore.YELLOW + "8. Volver.")
         
-        opcion = input("Seleccione una opción: ")
+        opcion = input(Fore.GREEN + "Seleccione una opción: ")
         
         if opcion == "1":
             consultas.consulta_uno(conn)  
@@ -98,38 +145,19 @@ def menu_consultas(conn):
         elif opcion == "8":
             break
         else:
-            print("Opción no válida. Intente de nuevo.")
+            print(Fore.RED + "Opción no válida. Intente de nuevo.")
 
 def menu_pluviales():
     while True:
-        print("1. Cargar registros ")
-        print("2. Salir")
-        opcion = input("Seleccione una opción: ")
+        print(Fore.YELLOW +"1. Cargar registros ")
+        print(Fore.YELLOW +"2. Salir")
+        opcion = input(Fore.GREEN + "Seleccione una opción: ")
 
         if opcion == '1':
             gestionDatosPluviales.cargar_registros_pluviales()
         elif opcion == '2':
-            print("Salir del programa.")
             break
         else:
-            print("Opción no válida. Intentar de nuevo.")
-
-def menu_accesos():
-      while True:
-        print("1. Mostrar todos los accesos. ")
-        print("2. Mostrar los logs de intentos fallidos. ")
-        print("3. Salir")
-        opcion = input("Seleccione una opción: ")
-
-        if opcion == '1':
-            gestion_acceso.mostrar_accesos()
-        elif opcion == '2':
-            print("falta.")    
-        elif opcion == '3':
-            print("Salir del programa.")
-            break
-        else:
-            print("Opción no válida. Intentar de nuevo.")  
-
+            print(Fore.RED + "Opción no válida. Intentar de nuevo.")
 
 menu_principal()
