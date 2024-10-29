@@ -92,7 +92,7 @@ def menu_ordenamiento():
         if opcion == "1":
             ejecutar.ordenar_usuarios_burbuja()
         elif opcion == "2":
-            print("Falta") #falta un submenu con opciones de búsqueda por dni, username o mail. 
+            print("Falta") #falta un submenu con opciones de búsqueda por dni, username o mail, y mostrar los usuarios. 
         elif opcion == "3":
             break
         else:

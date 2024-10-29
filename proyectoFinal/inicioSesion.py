@@ -23,7 +23,7 @@ def iniciar_sesion(usuarios, gestion_acceso):
         print("El username no está registrado.")
 
 def menu_acceso():
-    from menu_principal import menu_consultas
+    from main import menu_consultas
     try: 
         while True:
             print("Ha ingresado al sistema.")
