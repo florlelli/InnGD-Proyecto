@@ -213,6 +213,65 @@ def menu_accesos():
         else:
             print(Fore.RED + "Opción no válida. Intentar de nuevo.")
 
+def menu_consultas(conn):
+    while True:
+        print(Fore.CYAN + "\n--- Menú Base de datos: CRUD y consultas ---")
+        print(Fore.YELLOW + "1. CRUD de empleados.") 
+        print(Fore.YELLOW + "2. Lista completa de productos.") 
+        print(Fore.YELLOW + "3. Clientes y sus direcciones.") 
+        print(Fore.YELLOW + "4. Empleados activos y sus ventas.")
+        print(Fore.YELLOW + "5. Resumen de ventas por área.")
+        print(Fore.YELLOW + "6. Satisfacción del cliente por empleado.")
+        print(Fore.YELLOW + "7. Ventas totales por empleado.") 
+        print(Fore.YELLOW + "8. Productos con el stock") 
+        print(Fore.YELLOW + "9. Volver.")
+        
+        opcion = input(Fore.GREEN + "Seleccione una opción: ")
+        
+        if opcion == "1":
+            crud_empleados(conn)  
+        elif opcion == "2":
+            consultas.consulta_dos(conn)  
+        elif opcion == "3":
+            consultas.consulta_tres(conn)  
+        elif opcion == "4":
+            consultas.consulta_cuatro(conn)  
+        elif opcion == "5":
+            consultas.consulta_cinco(conn)  
+        elif opcion == "6":
+            consultas.consulta_seis(conn)  
+        elif opcion == "7":
+            consultas.consulta_siete(conn)  
+        elif opcion == "8":
+            consultas.consulta_ocho(conn) 
+        elif opcion == "9":
+            break
+        else:
+            print(Fore.RED + "Opción no válida. Intente de nuevo.")
+
+def crud_empleados(conn):
+    while True:
+        print(Fore.CYAN + "\nMenú empleados:")
+        print(Fore.YELLOW + "1. Agregar empleado.") 
+        print(Fore.YELLOW + "2. Mostrar empleados.") 
+        print(Fore.YELLOW + "3. Modificar empleado.") 
+        print(Fore.YELLOW + "4. Eliminar empleado.") 
+        print(Fore.YELLOW + "5. Volver al Menú Principal")
+        opcion = input(Fore.GREEN + "Seleccione una opción: ")
+        
+        if opcion == "1":
+            consultas.agregar_empleado(conn)
+        elif opcion == "2":
+            consultas.mostrar_empleados(conn)
+        elif opcion == "3":
+            consultas.modificar_empleado(conn)
+        elif opcion == "4":
+            consultas.eliminar_empleado(conn)
+        elif opcion == "5":
+            break
+        else:
+            print(Fore.YELLOW + "Opción no válida. Intente de nuevo.")    
+
 def menu_pluviales():
     while True:
         print(Fore.YELLOW + "1. Cargar registros")
