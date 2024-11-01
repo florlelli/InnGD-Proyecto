@@ -1,0 +1,3 @@
+Intento fallido el 2024-10-31 21:12:47.653570. Usuario: bren. Password: 123
+Intento fallido el 2024-10-31 21:12:54.533601. Usuario: bren123. Password: 1234
+Intento fallido el 2024-11-01 00:06:08.798226. Usuario: cami. Password: cami123
