@@ -1,7 +1,7 @@
 from gestionAcceso import Acceso
 import pickle
 from datetime import datetime
-import sys #para salir del sistema
+import sys  # Para salir del sistema
 
 class Usuario:
     def __init__(self, id, username, dni, password, email):
@@ -38,13 +38,10 @@ class Usuario:
     def set_email(self, email):
         self.__email = email
 
-class Usuarios:  #para crud de los usuarios
+class Usuarios:  # Para CRUD de los usuarios
     def __init__(self):      
         self.usuarios = {} 
-        self.accesos = [] 
-        self.usuarios_ordenados = False  # Nuevo atributo para rastrear si los usuarios están ordenados
         self.cargar_usuarios() 
-        self.cargar_accesos()
         
     def cargar_usuarios(self):
         try:
@@ -56,31 +53,6 @@ class Usuarios:  #para crud de los usuarios
     def guardar_usuarios(self):
         with open('usuarios.ispc', 'wb') as f: 
             pickle.dump(self.usuarios, f) 
-
-    def cargar_accesos(self):
-        try:
-            with open('accesos.ispc', 'rb') as f:
-                self.accesos = pickle.load(f)
-        except (FileNotFoundError, EOFError):
-            self.accesos = []
-
-    def guardar_accesos(self):
-        with open('accesos.ispc', 'wb') as f:
-            pickle.dump(self.accesos, f)
-
-#--------------------------------------- ORDENAMIENTO ----------------------------------------------------------------------
-    def ordenar_usuarios_burbuja(self):
-        usuarios_list = list(self.usuarios.values())
-        n = len(usuarios_list)
-        for i in range(n):
-            for j in range(0, n - i - 1):
-                if usuarios_list[j].get_username() > usuarios_list[j + 1].get_username():
-                    usuarios_list[j], usuarios_list[j + 1] = usuarios_list[j + 1], usuarios_list[j]
-        
-        self.usuarios = {user.get_username(): user for user in usuarios_list}
-        self.guardar_usuarios()  
-        self.usuarios_ordenados = True  
-        print("Usuarios ordenados por burbuja y guardados en usuarios.ispc.")
 
 # --------------------------------------- CRUDS ----------------------------------------------------------------------
     def agregar_usuario(self): 
@@ -102,7 +74,6 @@ class Usuarios:  #para crud de los usuarios
         password = input("Ingrese una password: ")
         self.usuarios[username] = Usuario(id, username, dni, password, email)  
         self.guardar_usuarios() 
-        self.usuarios_ordenados = False
         print(f"\nSe registró el usuario {username}.")
 
     def modificar_usuario(self):
@@ -122,7 +93,6 @@ class Usuarios:  #para crud de los usuarios
         if username in self.usuarios:
             del self.usuarios[username]  
             self.guardar_usuarios()  
-            self.usuarios_ordenados = False
             print(f"Usuario {username} eliminado correctamente.")
         else:
             print(f"No existe el usuario con username {username}.")
@@ -130,12 +100,7 @@ class Usuarios:  #para crud de los usuarios
 # -------------------------------- BÚSQUEDAS ----------------------------------------------------------
     def buscar_usuario(self):
         username = input("Ingrese el username del usuario a buscar: ")
-        if self.usuarios_ordenados:
-            print("Búsqueda realizada por técnica de búsqueda binaria.")
-            resultado = self.busqueda_binaria(username)
-        else:
-            print("Búsqueda realizada por técnica de búsqueda secuencial.")
-            resultado = self.busqueda_secuencial(username)
+        resultado = self.busqueda_secuencial(username)
 
         if resultado:
             print(f"ID: {resultado.get_id()}, Username: {resultado.get_username()}, Email: {resultado.get_email()}")
@@ -146,20 +111,6 @@ class Usuarios:  #para crud de los usuarios
         for user in self.usuarios.values():
             if user.get_username() == username:
                 return user
-        return None
-
-    def busqueda_binaria(self, username):
-        usuarios_list = sorted(self.usuarios.values(), key=lambda user: user.get_username())
-        low, high = 0, len(usuarios_list) - 1
-
-        while low <= high:
-            mid = (low + high) // 2
-            if usuarios_list[mid].get_username() == username:
-                return usuarios_list[mid]
-            elif usuarios_list[mid].get_username() < username:
-                low = mid + 1
-            else:
-                high = mid - 1
         return None
 
     def mostrar_usuarios(self):

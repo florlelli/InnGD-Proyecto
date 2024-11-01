@@ -2,6 +2,7 @@ from datetime import datetime
 from gestionAcceso import Acceso
 import baseDeDatos
 import mysql.connector
+from colorama import init, Fore, Style
 
 def iniciar_sesion(usuarios, gestion_acceso):
     username = input("Ingrese el username: ")
@@ -10,11 +11,10 @@ def iniciar_sesion(usuarios, gestion_acceso):
         if usuarios.usuarios[username].get_password() == password:
             print("Ingresó correctamente.")
             fechaIngreso = datetime.now()
-            acceso = Acceso(len(gestion_acceso.accesos) + 1, fechaIngreso, username)
+            acceso = Acceso(len(gestion_acceso.get_accesos()) + 1, fechaIngreso, username)
             gestion_acceso.registrar_acceso(acceso)
-            print("Llamando al menú de acceso...")  # Para depuración
-            menu_acceso()  # Aquí se llama al menú de acceso
-            print("Debería haber salido del menú de acceso.")  # Para depuración
+            print("Llamando al menú de acceso...")
+            menu_acceso(gestion_acceso, acceso)  
         else:
             gestion_acceso.registrar_intento_fallido(username, password)
             print("Password incorrecta.")
@@ -22,33 +22,34 @@ def iniciar_sesion(usuarios, gestion_acceso):
         gestion_acceso.registrar_intento_fallido(username, password)
         print("El username no está registrado.")
 
-def menu_acceso():
-    from main import menu_consultas
+def menu_acceso(gestion_acceso, acceso_actual):
+    from main import menu_consultas  
     try: 
         while True:
-            print("Ha ingresado al sistema.")
-            print("1. Gestionar la base de datos.")
-            print("2. Volver al menú principal.")
-            print("3. Salir de la aplicación.")
-            opcion = input("Ingrese su opción: ")
+            print(Fore.CYAN + "Ha ingresado al sistema.")
+            print(Fore.YELLOW + "1. Gestionar la base de datos.")
+            print(Fore.YELLOW + "2. Volver al menú principal.")
+            print(Fore.YELLOW + "3. Salir de la aplicación.")
+            opcion = input(Fore.GREEN + "Ingrese su opción: ")
+
             if opcion == "1":
                 user_base = input("Ingrese su usuario de MySQL Workbench: ")
                 pass_base = input("Ingrese su contraseña de MySQL Workbench: ")
                 
-                # Intentar conectar a la base de datos
                 try:
                     conn = baseDeDatos.obtener_conexion(user_base, pass_base)
-                    print("Conexión a la base de datos exitosa.")
-                    # Aquí puedes llamar a menu_consultas o cualquier otra función para gestionar la base de datos
-                    menu_consultas(conn)  # Asumiendo que se pasa la conexión a este menú
+                    print(Fore.BLUE + "Conexión a la base de datos exitosa.")
+                    menu_consultas(conn)
                 except mysql.connector.Error as err:
                     print(f"Error: {err}")
             
             elif opcion == "2":
                 return
             elif opcion == "3":
-                print("Salió del sistema.")
-                exit()  # Cambié sys.exit() por exit() para simplificar
+                acceso_actual.set_fecha_salida(datetime.now()) 
+                gestion_acceso.guardar_accesos()  
+                print(Fore.RED + "Salió del sistema.")
+                exit()  
             else:
                 print("Opción incorrecta. Ingrese otra.")
     except Exception as e:

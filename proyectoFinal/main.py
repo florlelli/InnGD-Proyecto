@@ -16,27 +16,23 @@ def menu_principal():
     while True:
         print(Fore.CYAN + "\n--- Menú Principal ---")
         print(Fore.YELLOW + "1. Usuarios y Accesos de la Aplicación.")  
-        print(Fore.YELLOW + "2. Mostrar los datos de accesos.")
-        print(Fore.YELLOW + "3. Ingresar al sistema con los datos de usuario.")  
-        print(Fore.YELLOW + "4. Análisis de datos.")
-        print(Fore.YELLOW + "5. Salir de la palicación.")
+        print(Fore.YELLOW + "2. Ingresar al sistema con los datos de usuario.")  
+        print(Fore.YELLOW + "3. Análisis de datos.")
+        print(Fore.YELLOW + "4. Salir de la aplicación.")
 
         opcion = input(Fore.GREEN + "Ingrese su opción: ")
 
         if opcion == "1":
             menu_usuarios()
         elif opcion == "2":
-            menu_accesos()
+            inicioSesion.iniciar_sesion(ejecutar, gestion_acceso)  
         elif opcion == "3":
-            inicioSesion.iniciar_sesion(ejecutar, gestion_acceso)
-        elif opcion == "4":
             menu_pluviales()    
-        elif opcion == "5":
+        elif opcion == "4":
             print(Fore.RED + "Saliendo de la aplicación...")
             sys.exit()
         else:
             print(Fore.RED + "Opción incorrecta. Ingrese otra.")
-
 
 def menu_usuarios():
     while True:
@@ -57,7 +53,7 @@ def menu_usuarios():
         elif opcion == "4":
             break
         else:
-            print(Fore.RED + "Opción incorrecta. Ingrese otra.")    
+            print(Fore.RED + "Opción incorrecta. Ingrese otra.")  
 
 def menu_gestion_usuarios():
     while True:
@@ -92,7 +88,7 @@ def menu_ordenamiento():
         if opcion == "1":
             ejecutar.ordenar_usuarios_burbuja()
         elif opcion == "2":
-            print("Falta") #falta un submenu con opciones de búsqueda por dni, username o mail, y mostrar los usuarios. 
+            print("Falta") #falta un submenu con opciones de búsqueda por dni, username o mail. 
         elif opcion == "3":
             break
         else:
