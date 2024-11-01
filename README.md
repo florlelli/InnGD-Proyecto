@@ -7,13 +7,6 @@ Este proyecto consiste en el desarrollo de una aplicación en Python que gestion
 - Clientes: Registro y gestión de la información de los clientes.
 - Empleados: Registro y seguimiento de empleados, con un sistema de estado (activo/inactivo) y evaluaciones de desempeño basadas en las puntuaciones de los clientes.
 - Satisfacción del Cliente: Evaluación de la performance de los empleados por parte de los clientes, con la posibilidad de generar reportes para análisis.
-## Estructura del Proyecto
-El proyecto está dividido en diferentes módulos:
-- Módulo de Autenticación: Permite registrar nuevos usuarios y autenticarse con nombre de usuario y contraseña.
-- Módulo de Ventas: Gestiona las transacciones de venta y su relación con el inventario, los clientes y los empleados.
-- Módulo de Aritmética: Realiza cálculos matemáticos básicos utilizados en el CAPTCHA y otras operaciones internas.
-- Módulo de Inventario: Mantiene actualizada la cantidad de productos disponibles y alerta cuando el stock es bajo.
-- Módulo de Clientes y Empleados: Registra y gestiona la información de los clientes y empleados, con seguimiento de su actividad y desempeño.
 ## Instrucciones de Instalación y Ejecución
 1. Clona este repositorio en tu máquina local:
    ```bash
@@ -33,19 +26,11 @@ El proyecto está dividido en diferentes módulos:
   - Cada vez que un usuario inicia sesión correctamente, se registra un acceso con la fecha de ingreso y salida en el archivo `accesos.ispc`.
   - Los intentos fallidos se registran en el archivo de texto `logs.txt`.
 ## Base de Datos
-- **Estructura de la Base de Datos**: 
-  La base de datos relacional en MySQL contiene las siguientes tablas:
-  1. **Usuarios**: Registra la información de los usuarios.
-  2. **Accesos**: Registra los accesos de los usuarios con fechas de ingreso y salida.
-  
-  Estas tablas están relacionadas a través de claves foráneas.
-
 - **Consultas SQL**:
   Se utilizan las siguientes consultas SQL para la interacción con la base de datos:
   - `SELECT`, `INSERT`, `UPDATE`, `DELETE` para el CRUD de usuarios.
   - Consultas con `JOIN` para obtener los accesos de cada usuario.
-## Posibles Inconvenientes y Soluciones
-- Durante el desarrollo, tuvimos algunos problemas con la serialización de datos al almacenar usuarios en archivos binarios. Esto se resolvió utilizando el módulo `pickle` de Python.
+
 
 
 
