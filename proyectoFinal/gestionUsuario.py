@@ -89,13 +89,31 @@ class Usuarios:  # Para CRUD de los usuarios
             print(f"No existe el usuario con username {username}.")
 
     def eliminar_usuario(self):
-        username = input("Ingrese el username del usuario a eliminar: ")
-        if username in self.usuarios:
-            del self.usuarios[username]  
-            self.guardar_usuarios()  
-            print(f"Usuario {username} eliminado correctamente.")
+        opcion = input("Eliminar usuario por: \n1. Username \n2. Email \nIngrese 1 o 2: ")
+        if opcion == '1':
+            username = input("Ingrese el username del usuario a eliminar: ")
+            if username in self.usuarios:
+                del self.usuarios[username]  
+                self.guardar_usuarios()  
+                print(f"Usuario {username} eliminado correctamente.")
+            else:
+                print(f"No existe el usuario con username {username}.")
+        elif opcion == '2':
+            email = input("Ingrese el email del usuario a eliminar: ")
+            usuario_encontrado = None
+            for usuario in self.usuarios.values():
+                if usuario.get_email() == email:
+                    usuario_encontrado = usuario
+                    break
+            if usuario_encontrado:
+                username = usuario_encontrado.get_username()
+                del self.usuarios[username]  
+                self.guardar_usuarios()  
+                print(f"Usuario con email {email} eliminado correctamente.")
+            else:
+                print(f"No existe un usuario con el email {email}.")
         else:
-            print(f"No existe el usuario con username {username}.")
+            print("Opción no válida. Intente de nuevo.")
 
 # -------------------------------- BÚSQUEDAS ----------------------------------------------------------
     def buscar_usuario(self):
