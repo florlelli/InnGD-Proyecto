@@ -104,7 +104,7 @@ def menu_accesos():
         if opcion == '1':
             gestion_acceso.mostrar_accesos()
         elif opcion == '2':
-            print("falta.") #falta mostrar los logs   
+            gestion_acceso.mostrar_intentos_fallidos()    
         elif opcion == '3':
             break
         else:

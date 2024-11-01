@@ -1,5 +1,6 @@
 import pickle
 from datetime import datetime
+from colorama import init, Fore, Style
 
 class Acceso:
     def __init__(self, id, fechaIngreso, usuarioLogueado):
@@ -57,4 +58,17 @@ class GestionAcceso:
 
     def get_accesos(self):
         return self.__accesos
-            
+
+    def mostrar_intentos_fallidos(self):
+        try:
+            with open('logs.txt', 'r') as log:
+                registros = log.readlines()
+                if not registros:
+                    print("No hay registros de intentos fallidos.")
+                    return
+                
+                print(Fore.CYAN + "--- Logs de Intentos Fallidos ---")
+                for registro in registros:
+                    print(registro.strip())
+        except FileNotFoundError:
+            print("No se encontraron registros de intentos fallidos.")            
